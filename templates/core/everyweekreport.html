@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <body class="page-account">
+    <input type="checkbox" id="hamb"/>
+    {% include 'includes/header.html' %}
+    <main>
+        <section class="account">
+            <h1>Еженедельный отчет</h1>
+            <form class="account-form" enctype="multipart/form-data" method="post"
+                  action="{% url 'core:everyweekreport' %}">
+                {% csrf_token %}
+                <div class="account-field">
+                    <label for="date">Дата</label>
+                    {{ form.date }}
+                </div>
+                <div class="account-field">
+                    <label for="weight">Вес, кг</label>
+                    <input type="number" name="weight" id="weight" step="0.1" min="0" required/>
+                </div>
+                <div class="account-field">
+                    <label for="neck">Шея, см</label>
+                    <input type="number" name="neck" id="neck" step="0.1" min="0" required/>
+                </div>
+                <div class="account-field">
+                    <label for="waist">Талия, см</label>
+                    <input type="number" name="waist" id="waist" step="0.1" min="0" required/>
+                </div>
+                <div class="account-field">
+                    <label for="hips">Бёдра, см</label>
+                    <input type="number" name="hips" id="hips" step="0.1" min="0" required/>
+                </div>
+                <div class="account-photo">
+                    <p class="account-photo-title">Фото-отчет</p>
+                    <div class="view">
+                        <img src="{% static 'img/speredi.png' %}"/>
+                        <div class="account-photo-field">
+                            <input type="file" onchange="previewFile()" name="front_view" id="front_view"
+                                   accept="image/png, image/jpeg">
+                            <label for="front_view">
+                                <span>Вид спереди</span>
+                                <span class="sel">Выбрать</span>
+                                <span class="img">
+                    <img src="" height="73" alt="">
+                  </span>
+
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="view">
+                        <img src="{% static 'img/sboku.png' %}"/>
+                        <div class="account-photo-field">
+                            <input type="file" onchange="previewFile1()" name="side_view" id="side_view"
+                                   accept="image/png, image/jpeg">
+                            <label for="side_view">
+                                <span>Вид сбоку</span>
+                                <span class="sel">Выбрать</span>
+                                <span class="img">
+                    <img src="" height="73" alt="">
+                  </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="view">
+                        <img src="{% static 'img/back.png' %}"/>
+                        <div class="account-photo-field">
+                            <input type="file" onchange="previewFile2()" name="back_view" id="back_view"
+                                   accept="image/png, image/jpeg">
+                            <label for="back_view">
+                                <span>Вид сзади</span>
+                                <span class="sel">Выбрать</span>
+                                <span class="img">
+                    <img src="" height="73" alt="">
+                  </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-2">Отправить</button>
+            </form>
+        </section>
+    </main>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+
+        function previewFile() {
+            const preview = document.querySelector('label[for=front_view] img');
+            const file = document.querySelector('input[name=front_view]').files[0];
+            const span = document.querySelector('label[for=front_view] .sel');
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+            if (file) {
+                reader.readAsDataURL(file);
+                span.parentNode.removeChild(span);
+            }
+        }
+
+        function previewFile1() {
+            const preview = document.querySelector('label[for=side_view] img');
+            const file = document.querySelector('input[name=side_view]').files[0];
+            const span = document.querySelector('label[for=side_view] .sel');
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+            if (file) {
+                reader.readAsDataURL(file);
+                span.parentNode.removeChild(span);
+            }
+        }
+
+        function previewFile2() {
+            const preview = document.querySelector('label[for=back_view] img');
+            const file = document.querySelector('input[name=back_view]').files[0];
+            const span = document.querySelector('label[for=back_view] .sel');
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+            if (file) {
+                reader.readAsDataURL(file);
+                span.parentNode.removeChild(span);
+            }
+        }
+    </script>
+    </body>
+{% endblock %}

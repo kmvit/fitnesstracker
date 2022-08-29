@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <body class="page-reviews">
+    <header>
+        <nav>
+            <a href="{% url 'core:about' %}">О проекте</a>
+            <a href="/" class="active">Отзывы</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'core:admin_review' %}">Личный кабинет</a>
+            {% else %}
+                <a href="{% url 'users:login' %}" class="entry-a">Войти</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        <section class="reviews">
+            <h1>Результат на лицо!</h1>
+
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    {% for image in page.pageimage_set.all %}
+                        <div class="slide swiper-slide">
+                            <!-- <label for="s5"></label> -->
+                            <div class="before">
+                                <p class="slide-title">До занятий</p>
+                                <img src="{{ image.image_before.url }}"/>
+                            </div>
+                            <div class="after">
+                                <p class="slide-title">После</p>
+                                <img src="{{ image.image_after.url }}"/>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="reviews">
+                {% for review in reviews %}
+                    <div class="table1">
+                        <p class="table1-title">{{ review.name }}</p>
+                        <div class="table1-content">
+                            <div class="t1-row">
+                                {{ review.text|safe }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if not user.is_authenticated %}
+                <a href="{% url 'users:signup' %}" class="btn">Записаться в проект</a>
+            {% endif %}
+
+        </section>
+    </main>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/browse/swiper@8/modules/effect-coverflow/"></script>
+    <script src="https://unpkg.com/browse/swiper@8/modules/pagination/pagination.js"></script>
+    <script>
+        var swiper = new Swiper(".swiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true
+            },
+        });
+        // function myFunction(event) {
+        //   var x = event.touches[0].clientX;
+        //   var y = event.touches[0].clientY;
+        //   console.log(x, y);
+        //   // document.getElementById("demo").innerHTML = x + ", " + y;
+        // }
+    </script>
+    </body>
+{% endblock %}

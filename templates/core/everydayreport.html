@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <body class="page-account">
+    <input type="checkbox" id="hamb"/>
+    {% include 'includes/header.html' %}
+    <main>
+        <section class="account">
+            <h1>Ежедневный отчет</h1>
+            <form class="account-form" method="post" enctype="multipart/form-data" action="{% url 'core:everydayreport' %}">
+                {% csrf_token %}
+                <div class="account-field">
+                    <label for="date">Дата</label>
+                    {{ form.date }}
+                </div>
+                <div class="account-field">
+                    <label for="weight">Вес утром</label>
+                    <input type="number" name="weight" id="weight" step="0.1" min="0" required/>
+                </div>
+                <div class="account-field">
+                    <label for="step">Шаги</label>
+                    <input type="number" name="steps" id="step" step="0.1" min="0" required/>
+                </div>
+                <div class="account-field">
+                    <label for="food">Ссылка на отчет</label>
+                    <input type="text" name="link" id="id_link"/>
+                </div>
+                <div class="account-field">
+                    <label for="food">Файл</label>
+                    {{ form.file }}
+                </div>
+                <div class="account-field">
+                    <input type="checkbox" name="critical_days" id="kd"/>
+                    <label for="kd">
+                        <span>КД</span>
+                        <span></span>
+                    </label>
+                </div>
+                <button class="btn btn-2">Отправить</button>
+            </form>
+        </section>
+    </main>
+    </body>
+{% endblock %}

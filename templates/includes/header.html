@@ -1,0 +1,25 @@
+{% load static %}
+<header>
+    <nav>
+        <div class="profile">
+            <img src="{% static 'img/profile.svg' %}"/>
+            {% if request.user.profile %}
+            <a href="{% url 'users:profile_update' %}" class="name">{{ request.user.profile.name }}</a>
+            {% else %}
+                <a href="{% url 'users:profile_create' %}" class="name">Заполните профиль</a>
+            {% endif %}
+        </div>
+        <label for="hamb">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div class="hamb">
+            <a href="{% url 'core:everydayreport' %}" >Ежедневный отчет</a>
+            <a href="{% url 'core:everyweekreport' %}">Еженедельный отчет</a>
+            <a href="{% url 'core:results' %}">Мой результат</a>
+            <a href="{% url 'core:admin_review' %}">Задания на неделю</a>
+            <label for="hamb"></label>
+        </div>
+    </nav>
+</header>
