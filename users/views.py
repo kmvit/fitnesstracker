@@ -47,9 +47,9 @@ class ProfileUpdate(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 
     def test_func(self):
         if self.request.user.profile and self.request.user.profile.active:
-            return True
-        else:
             return False
+        else:
+            return True
 
     def handle_no_permission(self):
         return redirect('core:home')
