@@ -28,6 +28,7 @@ class ProfileCreate(SuccessMessageMixin, CreateView):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            return redirect(self.success_url)
         context = {'form': form}
         return render(request, self.template_name, context)
 
