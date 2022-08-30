@@ -40,6 +40,9 @@ class EveryDayReportView(UserPassesTestMixin, TemplateView):
     def test_func(self):
         return self.request.user.profile.active
 
+    def handle_no_permission(self):
+        return redirect('core:home')
+
     def get_context_data(self, **kwargs):
         context = super(EveryDayReportView,self).get_context_data(**kwargs)
         context['form'] = EveryDayReportForm
@@ -65,6 +68,9 @@ class EveryWeekReportView(UserPassesTestMixin, TemplateView):
     def test_func(self):
         return self.request.user.profile.active
 
+    def handle_no_permission(self):
+        return redirect('core:home')
+
     def get_context_data(self, **kwargs):
         context = super(EveryWeekReportView,self).get_context_data(**kwargs)
         context['form'] = EveryWeekReportForm
@@ -88,6 +94,9 @@ class Results(UserPassesTestMixin, TemplateView):
     def test_func(self):
         return self.request.user.profile.active
 
+    def handle_no_permission(self):
+        return redirect('core:home')
+
     def get_context_data(self, **kwargs):
         context = super(Results, self).get_context_data(**kwargs)
         user = User.objects.get(username=self.request.user)
@@ -106,6 +115,9 @@ class AdminReview(UserPassesTestMixin, TemplateView):
 
     def test_func(self):
         return self.request.user.profile.active
+
+    def handle_no_permission(self):
+        return redirect('core:home')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
