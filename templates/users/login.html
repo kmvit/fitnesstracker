@@ -10,6 +10,15 @@
     </header>
     <main>
         <section class="entry">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">
+                            {{ message|safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <h1>Вход в личный кабинет</h1>
             <form class="entry-form" method="post" id="" action="{% url 'users:login' %}">
                 {% csrf_token %}
