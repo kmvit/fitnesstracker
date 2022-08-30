@@ -38,7 +38,10 @@ class EveryDayReportView(UserPassesTestMixin, TemplateView):
     success_url = '/'
 
     def test_func(self):
-        return self.request.user.profile.active
+        if self.request.user.profile and self.request.user.profile.active:
+            return True
+        else:
+            return False
 
     def handle_no_permission(self):
         return redirect('core:home')
@@ -66,7 +69,10 @@ class EveryWeekReportView(UserPassesTestMixin, TemplateView):
     success_url = '/'
 
     def test_func(self):
-        return self.request.user.profile.active
+        if self.request.user.profile and self.request.user.profile.active:
+            return True
+        else:
+            return False
 
     def handle_no_permission(self):
         return redirect('core:home')
@@ -92,7 +98,10 @@ class Results(UserPassesTestMixin, TemplateView):
     template_name = 'core/results.html'
 
     def test_func(self):
-        return self.request.user.profile.active
+        if self.request.user.profile and self.request.user.profile.active:
+            return True
+        else:
+            return False
 
     def handle_no_permission(self):
         return redirect('core:home')
@@ -114,7 +123,10 @@ class AdminReview(UserPassesTestMixin, TemplateView):
     template_name = 'core/adminreview.html'
 
     def test_func(self):
-        return self.request.user.profile.active
+        if self.request.user.profile and self.request.user.profile.active:
+            return True
+        else:
+            return False
 
     def handle_no_permission(self):
         return redirect('core:home')

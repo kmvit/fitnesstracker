@@ -7,7 +7,7 @@ class Profile(models.Model):
         ('men', 'Мужчина'),
         ('women', 'Женщина'),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь (латиницей)')
     name = models.CharField(max_length=20, verbose_name='Фамилия и имя')
     phone = models.CharField(max_length=12, verbose_name='Номер телефона')
     growth = models.IntegerField(verbose_name='Рост')

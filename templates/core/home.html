@@ -9,7 +9,11 @@
             <a href="/" class="active">Отзывы</a>
             {% if user.is_authenticated %}
                 {% if user.profile %}
-                    <a href="{% url 'users:profile_update' %}">Личный кабинет</a>
+                    {% if user.profile.active %}
+                        <a href="{% url 'core:admin_review' %}">{{ user.profile.name }}</a>
+                    {% else %}
+                        <a href="{% url 'users:profile_update' %}">{{ user.profile.name }}</a>
+                    {% endif %}
                 {% else %}
                     <a href="{% url 'users:profile_create' %}">Личный кабинет</a>
                 {% endif %}

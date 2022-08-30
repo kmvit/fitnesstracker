@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -34,7 +35,7 @@ class ProfileCreate(CreateView):
         return render(request, self.template_name, context)
 
 
-class ProfileUpdate(SuccessMessageMixin, UpdateView):
+class ProfileUpdate(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Profile
     form_class = ProfileForm
     template_name = 'users/profile_update.html'
@@ -43,3 +44,12 @@ class ProfileUpdate(SuccessMessageMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return Profile.objects.get(user=self.request.user)
+
+    def test_func(self):
+        if self.request.user.profile and self.request.user.profile.active:
+            return True
+        else:
+            return False
+
+    def handle_no_permission(self):
+        return redirect('core:home')
