@@ -10,6 +10,15 @@
     </header>
     <main>
         <section class="entry">
+        {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">
+                            {{ message|safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <h1>Ваши данные</h1>
             <form class="entry-form" method="post" id="" action="{% url 'users:profile_update' %}">
                 {% csrf_token %}

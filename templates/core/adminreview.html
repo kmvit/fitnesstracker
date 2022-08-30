@@ -6,6 +6,15 @@
     {% include 'includes/header.html' %}
     <main>
         <section class="account sent">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">
+                            {{ message|safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <h3>Здесь будут задания от тренера.</h3>
             {% for plank in planks %}
                 <div class="table1">

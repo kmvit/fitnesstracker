@@ -984,3 +984,8 @@ h1 {
 .history-table-content>div:not(:first-child) span {
   padding: 4px 0;
 }
+.messages {
+    padding: 10px;
+    color: #35bd00;
+    font-size: 20px;
+}

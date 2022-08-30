@@ -20,6 +20,15 @@
     </header>
     <main>
         <section class="reviews">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">
+                            {{ message|safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <h1>Результат на лицо!</h1>
 
             <!-- Slider main container -->
