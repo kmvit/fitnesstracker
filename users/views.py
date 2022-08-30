@@ -15,11 +15,10 @@ class SignUp(SuccessMessageMixin, CreateView):
     template_name = "users/signup.html"
 
 
-class ProfileCreate(SuccessMessageMixin, CreateView):
+class ProfileCreate(CreateView):
     model = Profile
     form_class = ProfileForm
     template_name = 'users/profile.html'
-    success_message = 'Профиль успешно создан, после оплаты Вам будет доступен весь функционал в личном кабинете.'
     success_url = reverse_lazy('core:home')
 
     def post(self, request):
@@ -28,6 +27,8 @@ class ProfileCreate(SuccessMessageMixin, CreateView):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            messages.success(self.request, "Профиль успешно создан, после оплаты "
+                                           "Вам будет доступен весь функционал в личном кабинете.")
             return redirect(self.success_url)
         context = {'form': form}
         return render(request, self.template_name, context)
