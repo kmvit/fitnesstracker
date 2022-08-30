@@ -136,7 +136,7 @@ DEBUG = env('DEBUG')
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['HOST IP', 'DOMAIN NAIM', 'localhost']
+    ALLOWED_HOSTS = ['*']
 STATIC_URL = '/static/'
 if DEBUG:
     STATIC_DIR = os.path.join(BASE_DIR, 'static')
