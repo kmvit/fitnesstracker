@@ -10,8 +10,8 @@ from .models import Profile
 
 class SignUp(SuccessMessageMixin, CreateView):
     form_class = CreationForm
-    success_url = reverse_lazy("core:home")
-    success_message = 'Вы успешно авторизовались, пожалуйста заполните профиль в личном кабинете.'
+    success_url = reverse_lazy("users:login")
+    success_message = 'Вы успешно зарегистрировались, пожалуйста войдите и заполните профиль в личном кабинете.'
     template_name = "users/signup.html"
 
 
@@ -19,7 +19,7 @@ class ProfileCreate(SuccessMessageMixin, CreateView):
     model = Profile
     form_class = ProfileForm
     template_name = 'users/profile.html'
-    success_message = 'Профиль успешно создан, после оплаты Вам будет доступен весь функционал.'
+    success_message = 'Профиль успешно создан, после оплаты Вам будет доступен весь функционал в личном кабинете.'
     success_url = reverse_lazy('core:home')
 
     def post(self, request):
