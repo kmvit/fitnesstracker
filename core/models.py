@@ -1,5 +1,6 @@
 from math import log
 
+from ckeditor.fields import RichTextField
 from django.db import models
 from users.forms import User
 from datetime import date
@@ -51,7 +52,7 @@ class EveryWeekReport(models.Model):
 class Page(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название страницы')
     slug = models.SlugField(unique=True, verbose_name='URL')
-    text = models.TextField('Содержание', blank=True)
+    text = RichTextField('Содержание', blank=True)
     image = models.ImageField(upload_to='author', blank=True, verbose_name='Изображение автора')
 
     class Meta:
