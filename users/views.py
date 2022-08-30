@@ -8,7 +8,7 @@ from .models import Profile
 
 class SignUp(CreateView):
     form_class = CreationForm
-    success_url = reverse_lazy("users:login")
+    success_url = reverse_lazy("core:home")
     template_name = "users/signup.html"
 
 
