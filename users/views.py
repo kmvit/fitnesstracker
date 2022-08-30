@@ -42,14 +42,16 @@ class ProfileUpdate(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Профиль успешно обновлен!'
     success_url = reverse_lazy('core:admin_review')
 
-    def get_object(self, queryset=None):
-        return Profile.objects.get(user=self.request.user)
-
     def test_func(self):
         if self.request.user.profile and self.request.user.profile.active:
-            return False
-        else:
             return True
+        else:
+            return False
 
     def handle_no_permission(self):
         return redirect('core:home')
+
+    def get_object(self, queryset=None):
+        return Profile.objects.get(user=self.request.user)
+
+
