@@ -43,14 +43,11 @@
                     {% for image in page.pageimage_set.all %}
                         <div class="slide swiper-slide">
                             <!-- <label for="s5"></label> -->
-                            <div class="before">
+                            <div>
                                 <p class="slide-title">До занятий</p>
                                 <img src="{{ image.image_before.url }}"/>
                             </div>
-                            <div class="after">
-                                <p class="slide-title">После</p>
-                                <img src="{{ image.image_after.url }}"/>
-                            </div>
+
                         </div>
                     {% endfor %}
                 </div>

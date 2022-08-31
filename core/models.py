@@ -66,8 +66,7 @@ class Page(models.Model):
 
 class PageImage(models.Model):
     page = models.ForeignKey(Page, on_delete=models.CASCADE, verbose_name='Страница')
-    image_before = models.ImageField(upload_to='reviews', blank=True, verbose_name='Фото до')
-    image_after = models.ImageField(upload_to='reviews', blank=True, verbose_name='Фото после')
+    image_before = models.ImageField(upload_to='reviews', blank=True, verbose_name='Фото')
 
     class Meta:
         verbose_name = 'Фото отзыв'
