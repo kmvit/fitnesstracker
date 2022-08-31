@@ -116,6 +116,10 @@ class Results(UserPassesTestMixin, TemplateView):
         if everyweekreports.count() > 1:
             context['report_previous'] = everyweekreports.order_by('-id')[1]
         context['report_last'] = everyweekreports.last()
+        context['you_today_result_weight'] = everyweekreports.last().weight - everyweekreports.order_by('-id')[1].weight
+        context['you_today_result_neck'] = everyweekreports.last().neck - everyweekreports.order_by('-id')[1].neck
+        context['you_today_result_waist'] = everyweekreports.last().waist - everyweekreports.order_by('-id')[1].waist
+        context['you_today_result_hips'] = everyweekreports.last().hips - everyweekreports.order_by('-id')[1].hips
         return context
 
 
@@ -133,7 +137,7 @@ class AdminReview(UserPassesTestMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tasks'] = Task.objects.last()
+        context['tasks'] = Task.objects.filter(profile=self.request.user.profile).last()
         context['planks'] = Plank.objects.filter(profile__user=self.request.user)
         return context
 

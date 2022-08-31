@@ -47,6 +47,7 @@ class EveryWeekReport(models.Model):
     class Meta:
         verbose_name = 'Еженедельные отчеты'
         verbose_name_plural = 'Еженедельный отчет'
+        ordering = ['-date',]
 
 
 class Page(models.Model):

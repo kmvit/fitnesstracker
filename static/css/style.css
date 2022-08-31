@@ -928,6 +928,7 @@ h1 {
   right: -16px;
 }
 
+
 .history-table {
   width: 100%;
   justify-content: flex-start;
@@ -988,4 +989,7 @@ h1 {
     padding: 10px;
     color: #35bd00;
     font-size: 20px;
+}
+.mt-10{
+  margin-top: 10px;
 }
