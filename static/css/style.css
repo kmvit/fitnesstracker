@@ -220,9 +220,9 @@ h1 {
   bottom: 0px !important;
 }
 .swiper-pagination-bullet {
-  width: 15px !important;
-  height: 15px !important;
-  margin: 0 6.5px !important;
+  width: 5px !important;
+  height: 5px !important;
+  margin: 0 2.5px !important;
   border: 1px solid #979797 !important;
   border-radius: 50% !important;
   background: none !important;
