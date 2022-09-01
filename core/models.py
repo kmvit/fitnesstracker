@@ -42,7 +42,7 @@ class EveryWeekReport(models.Model):
         return f'{fat:.{2}f}'
 
     def __str__(self):
-        return f'{self.user.profile.name} | отчет от {self.date}'
+        return f'Отчет от {self.date}'
 
     class Meta:
         verbose_name = 'Еженедельные отчеты'
