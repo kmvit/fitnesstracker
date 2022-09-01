@@ -116,11 +116,14 @@ class Results(UserPassesTestMixin, TemplateView):
         if everyweekreports.count() > 1:
             context['report_previous'] = everyweekreports.order_by('-id')[1]
         context['report_last'] = everyweekreports.last()
-        if everyweekreports.order_by('-id')[1]:
-            context['you_today_result_weight'] = everyweekreports.first().weight - everyweekreports.order_by('-id')[1].weight
-            context['you_today_result_neck'] = everyweekreports.first().neck - everyweekreports.order_by('-id')[1].neck
-            context['you_today_result_waist'] = everyweekreports.first().waist - everyweekreports.order_by('-id')[1].waist
-            context['you_today_result_hips'] = everyweekreports.first().hips - everyweekreports.order_by('-id')[1].hips
+        try:
+            if everyweekreports.order_by('-id')[1]:
+                context['you_today_result_weight'] = everyweekreports.first().weight - everyweekreports.order_by('-id')[1].weight
+                context['you_today_result_neck'] = everyweekreports.first().neck - everyweekreports.order_by('-id')[1].neck
+                context['you_today_result_waist'] = everyweekreports.first().waist - everyweekreports.order_by('-id')[1].waist
+                context['you_today_result_hips'] = everyweekreports.first().hips - everyweekreports.order_by('-id')[1].hips
+        finally:
+            return context
         return context
 
 
