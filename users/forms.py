@@ -20,7 +20,7 @@ class CreationForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'phone', 'growth']
+        fields = ['name', 'phone', 'growth', 'age']
 
 
 

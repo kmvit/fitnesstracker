@@ -11,6 +11,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=20, verbose_name='Фамилия и имя')
     phone = models.CharField(max_length=12, verbose_name='Номер телефона')
     growth = models.IntegerField(verbose_name='Рост')
+    age = models.IntegerField(blank=True, default='30', verbose_name='Возраст')
     active = models.BooleanField(default=False, verbose_name='Оплатил')
     gender = models.CharField(max_length=10, default=2, choices=GENDER, verbose_name='Пол')
 
