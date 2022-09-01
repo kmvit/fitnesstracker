@@ -42,12 +42,12 @@ class EveryWeekReport(models.Model):
         return f'{fat:.{2}f}'
 
     def __str__(self):
-        return f'Отчет от {self.date}'
+        return f'Отчет от {self.user.profile.name} дата {self.date}'
 
     class Meta:
         verbose_name = 'Еженедельные отчеты'
         verbose_name_plural = 'Еженедельный отчет'
-        ordering = ['-date',]
+
 
 
 class Page(models.Model):

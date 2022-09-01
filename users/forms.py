@@ -8,17 +8,16 @@ User = get_user_model()
 
 
 class CreationForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
         model = User
         username = UsernameField(
-            label='Team Name',
+            label='Логин (на латинице)',
             widget=forms.TextInput(attrs={'autofocus': True})
         )
-        password1 = forms.CharField(label='Enter password',
+        password1 = forms.CharField(label='Пароль',
                                     widget=forms.PasswordInput)
-        password2 = forms.CharField(label='Confirm password',
+        password2 = forms.CharField(label='Подтвердите пароль',
                                     widget=forms.PasswordInput)
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2')
 
 
 class ProfileForm(forms.ModelForm):

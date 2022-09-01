@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import date
@@ -10,7 +11,7 @@ class Task(models.Model):
     """Задания на неделю"""
     profile = models.ForeignKey(Profile, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Участник')
     date = models.DateField(default=date.today, verbose_name='Дата')
-    text = models.TextField(verbose_name='Задание')
+    text = RichTextField(verbose_name='Задание')
 
     class Meta:
         verbose_name = 'Задания'

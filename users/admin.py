@@ -18,6 +18,7 @@ class PlankInline(admin.TabularInline):
 
 class ProfileAdmin(admin.ModelAdmin):
     inlines = [TaskInline, PlankInline]
+    fields = ['name', 'phone', 'growth', 'age', 'gender', 'active']
 
 
 admin.site.register(Profile, ProfileAdmin)

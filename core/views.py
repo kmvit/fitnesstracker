@@ -112,16 +112,16 @@ class Results(UserPassesTestMixin, TemplateView):
         everyweekreports = EveryWeekReport.objects.filter(user=user)
         context['weight_average'] = everyweekreports.aggregate(average=Avg('weight'))
         context['weight_min'] = everyweekreports.aggregate(min=Min('weight'))
-        context['report_list'] = everyweekreports
+        context['report_list'] = everyweekreports.order_by('-date')
         if everyweekreports.count() > 1:
             context['report_previous'] = everyweekreports.order_by('-id')[1]
         context['report_last'] = everyweekreports.last()
         try:
             if everyweekreports.order_by('-id')[1]:
-                context['you_today_result_weight'] = everyweekreports.first().weight - everyweekreports.order_by('-id')[1].weight
-                context['you_today_result_neck'] = everyweekreports.first().neck - everyweekreports.order_by('-id')[1].neck
-                context['you_today_result_waist'] = everyweekreports.first().waist - everyweekreports.order_by('-id')[1].waist
-                context['you_today_result_hips'] = everyweekreports.first().hips - everyweekreports.order_by('-id')[1].hips
+                context['you_today_result_weight'] = everyweekreports.last().weight - everyweekreports.order_by('-id')[1].weight
+                context['you_today_result_neck'] = everyweekreports.last().neck - everyweekreports.order_by('-id')[1].neck
+                context['you_today_result_waist'] = everyweekreports.last().waist - everyweekreports.order_by('-id')[1].waist
+                context['you_today_result_hips'] = everyweekreports.last().hips - everyweekreports.order_by('-id')[1].hips
         finally:
             return context
         return context

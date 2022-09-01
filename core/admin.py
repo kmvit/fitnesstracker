@@ -7,11 +7,12 @@ from .models import EveryDayReport, EveryWeekReport, PageImage, Page, Review
 
 class EveryWeekReportAdmin(admin.ModelAdmin):
     list_filter = ['user__profile__name', 'date']
+    fields = ['date', 'weight', 'neck', 'waist', 'hips', 'side_view', 'front_view', 'back_view']
 
 
 class EveryDayReportAdmin(admin.ModelAdmin):
     list_filter = ['user__profile__name', 'date']
-    fields = ['user','date', 'weight', 'steps', 'critical_days', 'file', 'my_clickable_link']
+    fields = ['date', 'weight', 'steps', 'critical_days', 'file', 'my_clickable_link']
 
     readonly_fields = ('my_clickable_link',)
 

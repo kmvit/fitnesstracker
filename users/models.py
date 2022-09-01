@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Profile(models.Model):
@@ -10,8 +12,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь (латиницей)')
     name = models.CharField(max_length=20, verbose_name='Фамилия и имя')
     phone = models.CharField(max_length=12, verbose_name='Номер телефона')
-    growth = models.IntegerField(verbose_name='Рост')
-    age = models.IntegerField(blank=True, default='30', verbose_name='Возраст')
+    growth = models.IntegerField(blank=True, default='0', verbose_name='Рост')
+    age = models.IntegerField(blank=True, default='0', verbose_name='Возраст')
     active = models.BooleanField(default=False, verbose_name='Оплатил')
     gender = models.CharField(max_length=10, default=2, choices=GENDER, verbose_name='Пол')
 
@@ -21,4 +23,10 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Профили участников'
         verbose_name_plural = 'Профиль участника'
+
+
+@receiver(post_save, sender=User)
+def create_favorites(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
 

@@ -17,7 +17,11 @@
                     {% else %}
                         <span class="up">
                     {% endif %}
-                    {{ report_last.fat }}
+                    {% if report_last %}
+                        {{ report_last.fat }}
+                    {% else %}
+                        0
+                    {% endif %}
                     </span>
                 </div>
                 <div class="tr-tr2">
@@ -30,39 +34,53 @@
                 </div>
                 <div class="tr-tr4">
                     <span>Шея, см</span>
-                    {% if report_last.neck|stringformat:"d" < report_previous.neck|stringformat:"d" %}
+                    {% if report_last.neck < report_previous.neck %}
                         <span class="down">
-                    {% elif report_last.neck|stringformat:"d" == report_previous.neck|stringformat:"d" %}
+                    {% elif report_last.neck == report_previous.neck %}
                         <span class="md">
-                    {% elif report_last.neck|stringformat:"d" > report_previous.neck|stringformat:"d" %}
+                    {% elif report_last.neck > report_previous.neck %}
                         <span class="up">
                     {% endif %}
-                    {{ report_last.neck }}
+                    {% if report_last %}
+                        {{ report_last.neck }}
+                    {% else %}
+                        0
+                    {% endif %}
                     </span>
                 </div>
                 <div class="tr-tr5">
                     <span>Талия, см</span>
-                    {% if report_last.hips|stringformat:"d" < report_previous.hips|stringformat:"d" %}
+                    {% if report_last.hips < report_previous.hips %}
                         <span class="down">
-                    {% elif report_last.hips|stringformat:"d" == report_previous.hips|stringformat:"d" %}
+                    {% elif report_last.hips == report_previous.hips %}
                         <span class="md">
-                    {% elif report_last.hips|stringformat:"d" > report_previous.hips|stringformat:"d" %}
+                    {% elif report_last.hips > report_previous.hips %}
                         <span class="up">
                     {% endif %}
-                    {{ report_last.hips }}
+                    {% if report_last %}
+                        {{ report_last.hips }}
+                    {% else %}
+                        0
+                    {% endif %}
+
                     </span>
 
                 </div>
                 <div class="tr-tr6">
                     <span>Бедра, см</span>
-                    {% if report_last.waist|stringformat:"d" < report_previous.waist|stringformat:"d" %}
+                    {% if report_last.waist < report_previous.waist %}
                         <span class="down">
-                    {% elif report_last.waist|stringformat:"d" == report_previous.waist|stringformat:"d" %}
+                    {% elif report_last.waist == report_previous.waist %}
                         <span class="md">
-                    {% elif report_last.waist|stringformat:"d" > report_previous.waist|stringformat:"d" %}
+                    {% elif report_last.waist > report_previous.waist %}
                         <span class="up">
                     {% endif %}
-                    {{ report_last.waist }}
+                    {% if report_last %}
+                        {{ report_last.waist }}
+                    {% else %}
+                        0
+                    {% endif %}
+
                     </span>
                 </div>
             </div>
@@ -88,7 +106,7 @@
                 </div>
             </div>
             <div class="history-table">
-                <p class="history-table-title mt-10">Мои результаты а неделю</p>
+                <p class="history-table-title mt-10">Мои результаты за неделю</p>
                 <div>
                     <ul>
                         <li>
