@@ -7,7 +7,7 @@ from .models import EveryDayReport, EveryWeekReport, PageImage, Page, Review
 
 class EveryWeekReportAdmin(admin.ModelAdmin):
 
-    fields = ['date', 'weight', 'neck', 'waist', 'hips', 'side_view', 'front_view', 'back_view']
+    fields = ['user', 'date', 'weight', 'neck', 'waist', 'hips', 'side_view', 'front_view', 'back_view']
 
 
 class EveryDayReportAdmin(admin.ModelAdmin):
