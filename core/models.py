@@ -5,6 +5,8 @@ from django.db import models
 from users.forms import User
 from datetime import date
 
+from users.models import Profile
+
 
 class EveryDayReport(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Участник')
@@ -24,7 +26,7 @@ class EveryDayReport(models.Model):
 
 
 class EveryWeekReport(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Участник')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Участник')
     date = models.DateField(default=date.today, verbose_name='Дата отчета')
     weight = models.FloatField(verbose_name='Вес')
     neck = models.FloatField(verbose_name='Шея')
@@ -34,15 +36,16 @@ class EveryWeekReport(models.Model):
     front_view = models.ImageField(upload_to='user_photo', blank=True, verbose_name='Вид спереди')
     back_view = models.ImageField(upload_to='user_photo', blank=True, verbose_name='Вид сзади')
 
+    @property
     def fat(self):
-        if self.user.profile.gender == 'men':
-            fat = 495 / (1.0324 - 0.19077 * log(self.hips - self.neck, 10) + 0.15456 * log(self.user.profile.growth, 10)) - 450
+        if self.user.gender == 'men':
+            fat = 495 / (1.0324 - 0.19077 * log(self.hips - self.neck, 10) + 0.15456 * log(self.user.growth, 10)) - 450
         else:
-            fat = 495 / (1.29579 - 0.35004 * log(self.hips + self.waist - self.neck, 10) + 0.22100 * log(self.user.profile.growth, 10)) - 450
+            fat = 495 / (1.29579 - 0.35004 * log(self.hips + self.waist - self.neck, 10) + 0.22100 * log(self.user.growth, 10)) - 450
         return f'{fat:.{2}f}'
 
     def __str__(self):
-        return f'Отчет от {self.user.profile.name} дата {self.date}'
+        return f'Отчет от {self.user} дата {self.date}'
 
     class Meta:
         verbose_name = 'Еженедельные отчеты'
@@ -83,3 +86,5 @@ class Review(models.Model):
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
+
+

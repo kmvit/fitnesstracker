@@ -12,8 +12,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь (латиницей)')
     name = models.CharField(max_length=20, verbose_name='Фамилия и имя')
     phone = models.CharField(max_length=12, verbose_name='Номер телефона')
-    growth = models.IntegerField(blank=True, default='0', verbose_name='Рост')
-    age = models.IntegerField(blank=True, default='0', verbose_name='Возраст')
+    growth = models.IntegerField(blank=True, verbose_name='Рост')
+    age = models.IntegerField(blank=True, verbose_name='Возраст')
     active = models.BooleanField(default=False, verbose_name='Оплатил')
     gender = models.CharField(max_length=10, default=2, choices=GENDER, verbose_name='Пол')
 

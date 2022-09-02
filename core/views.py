@@ -86,7 +86,7 @@ class EveryWeekReportView(UserPassesTestMixin, TemplateView):
         form = EveryWeekReportForm(request.POST, request.FILES)
         if form.is_valid():
             report = form.save(commit=False)
-            report.user = request.user
+            report.user = request.user.profile
             report.save()
             return redirect('core:success')
 
@@ -109,7 +109,7 @@ class Results(UserPassesTestMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Results, self).get_context_data(**kwargs)
         user = User.objects.get(username=self.request.user)
-        everyweekreports = EveryWeekReport.objects.filter(user=user)
+        everyweekreports = EveryWeekReport.objects.filter(user=user.profile)
         context['weight_average'] = everyweekreports.aggregate(average=Avg('weight'))
         context['weight_min'] = everyweekreports.aggregate(min=Min('weight'))
         context['report_list'] = everyweekreports.order_by('-date')
@@ -149,4 +149,36 @@ class AdminReview(UserPassesTestMixin, TemplateView):
 class Success(TemplateView):
     template_name = 'core/success.html'
 
+
+class AdminResultView(UserPassesTestMixin, TemplateView):
+    template_name = 'core/admin_results.html'
+
+    def test_func(self):
+        if self.request.user.profile and self.request.user.profile.active:
+            return True
+        else:
+            return False
+
+    def handle_no_permission(self):
+        return redirect('core:home')
+
+    def get_context_data(self, **kwargs):
+        context = super(AdminResultView, self).get_context_data(**kwargs)
+        user = User.objects.get(username=self.request.user)
+        everyweekreports = EveryWeekReport.objects.filter(user_id=kwargs['pk'])
+        context['weight_average'] = everyweekreports.aggregate(average=Avg('weight'))
+        context['weight_min'] = everyweekreports.aggregate(min=Min('weight'))
+        context['report_list'] = everyweekreports.order_by('-date')
+        if everyweekreports.count() > 1:
+            context['report_previous'] = everyweekreports.order_by('-id')[1]
+        context['report_last'] = everyweekreports.last()
+        try:
+            if everyweekreports.order_by('-id')[1]:
+                context['you_today_result_weight'] = everyweekreports.last().weight - everyweekreports.order_by('-id')[1].weight
+                context['you_today_result_neck'] = everyweekreports.last().neck - everyweekreports.order_by('-id')[1].neck
+                context['you_today_result_waist'] = everyweekreports.last().waist - everyweekreports.order_by('-id')[1].waist
+                context['you_today_result_hips'] = everyweekreports.last().hips - everyweekreports.order_by('-id')[1].hips
+        finally:
+            return context
+        return context
 

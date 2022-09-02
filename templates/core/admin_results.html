@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <body class="page-account">
+    <input type="checkbox" id="hamb"/>
+    {% include 'includes/header.html' %}
+    <main>
+        <section class="account">
+            <h1>Мой результат</h1>
+            <div class="table-result">
+                <div class="tr-tr1">
+                    <span>% жира</span>
+                    {% if report_last.fat < report_previous.fat %}
+                        <span class="down">
+                    {% elif report_last.fat == report_previous.fat %}
+                        <span class="md">
+                    {% else %}
+                        <span class="up">
+                    {% endif %}
+                    {% if report_last %}
+                        {{ report_last.fat }}
+                    {% else %}
+                        0
+                    {% endif %}
+                    </span>
+                </div>
+                <div class="tr-tr2">
+                    <span>Вес средн.</span>
+                    <span>{{ weight_average.average|stringformat:".1f" }}</span>
+                </div>
+                <div class="tr-tr3">
+                    <span>Вес мин.</span>
+                    <span>{{ weight_min.min|stringformat:".1f" }}</span>
+                </div>
+                <div class="tr-tr4">
+                    <span>Шея, см</span>
+                    {% if report_last.neck < report_previous.neck %}
+                        <span class="down">
+                    {% elif report_last.neck == report_previous.neck %}
+                        <span class="md">
+                    {% elif report_last.neck > report_previous.neck %}
+                        <span class="up">
+                    {% endif %}
+                    {% if report_last %}
+                        {{ report_last.neck }}
+                    {% else %}
+                        0
+                    {% endif %}
+                    </span>
+                </div>
+                <div class="tr-tr5">
+                    <span>Талия, см</span>
+                    {% if report_last.hips < report_previous.hips %}
+                        <span class="down">
+                    {% elif report_last.hips == report_previous.hips %}
+                        <span class="md">
+                    {% elif report_last.hips > report_previous.hips %}
+                        <span class="up">
+                    {% endif %}
+                    {% if report_last %}
+                        {{ report_last.hips }}
+                    {% else %}
+                        0
+                    {% endif %}
+
+                    </span>
+
+                </div>
+                <div class="tr-tr6">
+                    <span>Бедра, см</span>
+                    {% if report_last.waist < report_previous.waist %}
+                        <span class="down">
+                    {% elif report_last.waist == report_previous.waist %}
+                        <span class="md">
+                    {% elif report_last.waist > report_previous.waist %}
+                        <span class="up">
+                    {% endif %}
+                    {% if report_last %}
+                        {{ report_last.waist }}
+                    {% else %}
+                        0
+                    {% endif %}
+
+                    </span>
+                </div>
+            </div>
+            <div class="history-table">
+                <p class="history-table-title">История результатов</p>
+                <div class="history-table-content">
+                    <div class="ht-tr1">
+                        <span>Дата</span>
+                        <span>% жира</span>
+                        <span>Вес</span>
+                        <span>Талия</span>
+                        <span>Бёдра</span>
+                    </div>
+                    {% for report in report_list %}
+                        <div class="ht-tr1">
+                            <span>{{ report.date|date:"d.m.y" }}</span>
+                            <span>{{ report.fat }}</span>
+                            <span>{{ report.weight }}</span>
+                            <span>{{ report.hips }}</span>
+                            <span>{{ report.waist }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="history-table">
+                <p class="history-table-title mt-10">Мои результаты за неделю</p>
+                <div>
+                    <ul>
+                        <li>
+                            <span>Вес</span>
+                            <span>{{ you_today_result_weight }}</span>
+                        </li>
+                        <li>
+                            <span>Шея</span>
+                            <span>{{ you_today_result_neck }}</span>
+                        </li>
+                        <li>
+                            <span>Талия</span>
+                            <span>{{ you_today_result_hips }}</span>
+                        </li>
+                        <li>
+                            <span>Бедра</span>
+                            <span>{{ you_today_result_waist }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    </body>
+{% endblock %}
