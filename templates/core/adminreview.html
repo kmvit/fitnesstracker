@@ -38,7 +38,7 @@
             <div class="not">
                 <p class="not-title">Задание на неделю</p>
                 <p class="not-content">
-                    {{ tasks.text }}
+                    {{ tasks.text|safe }}
                 </p>
             </div>
             <a href="{% url 'core:results' %}" class="btn">
