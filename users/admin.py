@@ -36,7 +36,7 @@ class EveryWeekReportInline(admin.TabularInline):
 
 class ProfileAdmin(admin.ModelAdmin):
     inlines = [TaskInline, PlankInline]
-    fields = ['name', 'phone', 'growth', 'age', 'gender', 'active', 'my_clickable_link']
+    fields = ['user','name', 'phone', 'growth', 'age', 'gender', 'active', 'my_clickable_link']
     readonly_fields = ('my_clickable_link',)
 
     def my_clickable_link(self, instance):
