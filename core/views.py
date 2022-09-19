@@ -175,10 +175,12 @@ class AdminResultView(UserPassesTestMixin, TemplateView):
         context['report_last'] = everyweekreports.last()
         try:
             if everyweekreports.order_by('-id')[1]:
-                context['you_today_result_weight'] = everyweekreports.last().weight - everyweekreports.order_by('-id')[1].weight
-                context['you_today_result_neck'] = everyweekreports.last().neck - everyweekreports.order_by('-id')[1].neck
-                context['you_today_result_waist'] = everyweekreports.last().waist - everyweekreports.order_by('-id')[1].waist
-                context['you_today_result_hips'] = everyweekreports.last().hips - everyweekreports.order_by('-id')[1].hips
+                context['you_today_result_weight'] = everyweekreports.last().weight - everyweekreports.first().weight
+                context['you_today_result_neck'] = everyweekreports.last().neck - everyweekreports.first().neck
+                context['you_today_result_waist'] = everyweekreports.last().waist - everyweekreports.first().waist
+                context['you_today_result_hips'] = everyweekreports.last().hips - everyweekreports.first().hips
+                context['you_today_result_fat'] = float(everyweekreports.last().fat) - float(everyweekreports.first().fat)
+
         finally:
             return context
         return context
