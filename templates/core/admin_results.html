@@ -103,33 +103,13 @@
                             <span>{{ report.waist }}</span>
                         </div>
                     {% endfor %}
-                </div>
-            </div>
-            <div class="history-table">
-                <p class="history-table-title mt-10">Мои результаты за неделю</p>
-                <div>
-                    <ul>
-                        <li>
-                            <span>Жир</span>
-                            <span>{{ you_today_result_fat|stringformat:".1f" }}</span>
-                        </li>
-                        <li>
-                            <span>Вес</span>
-                            <span>{{ you_today_result_weight|stringformat:".1f" }}</span>
-                        </li>
-                        <li>
-                            <span>Шея</span>
-                            <span>{{ you_today_result_neck|stringformat:".1f" }}</span>
-                        </li>
-                        <li>
-                            <span>Талия</span>
-                            <span>{{ you_today_result_hips|stringformat:".1f" }}</span>
-                        </li>
-                        <li>
-                            <span>Бедра</span>
-                            <span>{{ you_today_result_waist|stringformat:".1f" }}</span>
-                        </li>
-                    </ul>
+                    <div class="ht-tr1">
+                        Результат
+                        <span>{{ you_today_result_fat|stringformat:".1f" }}</span>
+                        <span>{{ you_today_result_weight|stringformat:".1f" }}</span>
+                        <span>{{ you_today_result_hips|stringformat:".1f" }}</span>
+                        <span>{{ you_today_result_waist|stringformat:".1f" }}</span>
+                    </div>
                 </div>
             </div>
         </section>
