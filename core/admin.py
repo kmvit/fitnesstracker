@@ -6,7 +6,7 @@ from .models import EveryDayReport, EveryWeekReport, PageImage, Page, Review
 
 
 class EveryWeekReportAdmin(admin.ModelAdmin):
-
+    list_filter = ['user__name', 'date']
     fields = ['user', 'date', 'weight', 'neck', 'waist', 'hips', 'side_view', 'front_view', 'back_view']
 
 
