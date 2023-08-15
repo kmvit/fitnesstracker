@@ -4,8 +4,10 @@
     {% if user.is_authenticated %}
         {% if user.profile.active %}
             <a href="{% url 'core:admin_review' %}">Профиль</a>
+            <a href="{% url 'users:logout' %}">Выйти</a>
         {% else %}
             <a href="{% url 'users:profile_update' %}">Профиль</a>
+            <a href="{% url 'users:logout' %}">Выйти</a>
         {% endif %}
     {% else %}
         <a href="{% url 'users:login' %}" class="entry-a">Войти</a>

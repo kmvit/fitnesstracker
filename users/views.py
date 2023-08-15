@@ -44,5 +44,3 @@ class ProfileUpdate(SuccessMessageMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return Profile.objects.get(user=self.request.user)
-
-
